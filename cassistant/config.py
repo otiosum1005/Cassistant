@@ -1,0 +1,85 @@
+import os
+import yaml
+
+DEFAULT_CONFIG = """llm:
+  base_url: "http://127.0.0.1:8080/v1"
+  api_key: "none"
+  model: "llama-3.1-70b"
+  context_limit: 128000
+  timeout: 120
+  temperature: 0.2
+
+project:
+  include: 
+    - "**/*.py"
+    - "**/*.c"
+    - "**/*.cpp"
+    - "**/*.h"
+    - "**/*.hpp"
+    - "**/*.java"
+  exclude:
+    - "**/node_modules/**"
+    - "**/__pycache__/**"
+    - "**/tests/**"
+    - "**/.*/**"
+    - ".cassistant/**"
+  doc_dir: ".cassistant"
+"""
+
+class Config:
+    def __init__(self, data=None):
+        self.data = data or {}
+        
+    @property
+    def llm_base_url(self) -> str:
+        return self.data.get("llm", {}).get("base_url", "http://127.0.0.1:8080/v1")
+        
+    @property
+    def llm_api_key(self) -> str:
+        return self.data.get("llm", {}).get("api_key", "none")
+        
+    @property
+    def llm_model(self) -> str:
+        return self.data.get("llm", {}).get("model", "llama-3.1-70b")
+        
+    @property
+    def llm_context_limit(self) -> int:
+        return int(self.data.get("llm", {}).get("context_limit", 128000))
+        
+    @property
+    def llm_timeout(self) -> float:
+        return float(self.data.get("llm", {}).get("timeout", 120))
+        
+    @property
+    def llm_temperature(self) -> float:
+        return float(self.data.get("llm", {}).get("temperature", 0.2))
+
+    @property
+    def project_include(self) -> list:
+        return self.data.get("project", {}).get("include", ["**/*.py", "**/*.c", "**/*.cpp", "**/*.h", "**/*.hpp", "**/*.java"])
+
+    @property
+    def project_exclude(self) -> list:
+        return self.data.get("project", {}).get("exclude", ["**/node_modules/**", "**/__pycache__/**", "**/tests/**", "**/.*/**", ".cassistant/**"])
+
+    @property
+    def project_doc_dir(self) -> str:
+        return self.data.get("project", {}).get("doc_dir", ".cassistant")
+
+def load_config() -> Config:
+    config_path = os.path.join(".cassistant", "config.yaml")
+    if not os.path.exists(config_path):
+        return Config() # Fallback to default values
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+            return Config(data)
+    except Exception:
+        return Config()
+
+def ensure_config_exists():
+    os.makedirs(".cassistant", exist_ok=True)
+    config_path = os.path.join(".cassistant", "config.yaml")
+    if not os.path.exists(config_path):
+        with open(config_path, "w", encoding="utf-8") as f:
+            f.write(DEFAULT_CONFIG)

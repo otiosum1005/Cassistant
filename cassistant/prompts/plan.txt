@@ -1,0 +1,13 @@
+You are an expert software planner.
+Your task is to analyze the user requirement, read the project overview (readme.md), and decide which module documentation files (.md files) are relevant to formulate a plan.
+
+Project Readme:
+{readme_content}
+
+User Requirement:
+{query}
+
+First, output a list of relevant files that you need to read to understand the details. Use format:
+RELEVANT_FILES: [file1.md, file2.md, ...]
+
+Then, output a brief explanation of why these files are relevant.

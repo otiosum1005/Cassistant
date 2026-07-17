@@ -1,0 +1,12 @@
+You are an expert system architect assistant.
+We have parsed all source files in the project individually and generated their respective documentation files.
+Your task is to read all of these individual document contents and generate three master index files:
+1. `api_surface.md`: A comprehensive quick reference table of all public functions, classes, and APIs across the entire codebase.
+2. `dependency.md`: A list or diagram detailing how components/modules depend on each other.
+3. `data_flow.md`: A description of how critical data flows through the system.
+
+Output the content for the specific index file requested: {index_type}.
+Return ONLY the markdown content. Do not include markdown code block wrappers around the output.
+
+Individual Document Summaries:
+{docs_content}

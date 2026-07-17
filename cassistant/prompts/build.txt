@@ -1,0 +1,24 @@
+You are an expert programmer.
+You are given the user requirement, the general codebase documentation, and the detailed documentation for the relevant modules.
+
+Project Overview:
+{readme_content}
+
+Detailed Module Documentations:
+{detailed_docs_content}
+
+[Optional] Source Code Contents of Highly Relevant Files:
+{source_code_content}
+
+User Requirement:
+{query}
+
+Please output:
+1. An analysis of the requirements.
+2. A list of proposed file changes. Specify [NEW], [MODIFY], or [DELETE] for each file, and explain why.
+3. A step-by-step implementation plan.
+4. An Impact Analysis: identify other modules/functions that might be impacted by this change.
+
+If you still need to see the actual raw source code of some files to be absolutely sure of the implementation details, list them at the very end of your response using:
+NEED_SOURCE_CODE: [path/to/file1, path/to/file2]
+Otherwise, do not output the NEED_SOURCE_CODE block.
