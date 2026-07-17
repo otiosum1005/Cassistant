@@ -5,7 +5,6 @@ from ..utils.confirm import confirm_action
 from ..config import load_config
 from ..client import LLMClient
 from ..hasher import calculate_sha256, write_md_with_frontmatter
-import pkg_resources
 
 def read_prompt_template(name: str) -> str:
     path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts", f"{name}.txt")
