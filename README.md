@@ -35,7 +35,7 @@ All data is stored locally in a `.cassistant/` directory inside your project. No
 
 ```bash
 # Clone the repository
-git clone <repo-url>
+git clone https://github.com/otiosum1005/Cassistant.git
 cd cassistant
 
 # Install in editable mode (exposes the `cass` entrypoint)
